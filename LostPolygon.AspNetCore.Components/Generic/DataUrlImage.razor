@@ -1,0 +1,25 @@
+@using Ballast.Atlantis.Web
+@if (Base64Src != null) {
+    <img src="@Base64Src" @attributes="AdditionalAttributes" />
+}
+
+@code {
+
+    [Parameter(CaptureUnmatchedValues = true)]
+    public IReadOnlyDictionary<string, object>? AdditionalAttributes { get; set; }
+
+    [Parameter]
+    public string? MimeType { get; set; } = null!;
+
+    [Parameter]
+    public byte[]? Data { get; set; } = null!;
+
+    private string? Base64Src { get; set; }
+
+    protected override void OnParametersSet() {
+        if (MimeType != null && Data != null) {
+            Base64Src = DataUrlUtility.CreateDataUrl(MimeType, Data);
+        }
+    }
+
+}
