@@ -5,7 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 
-namespace LostPolygon.Mvc.DataSeeding {
+namespace LostPolygon.AspNetCore.DataSeeding {
     public class DataSeedingService : IHostedService {
         private readonly IServiceProvider _serviceProvider;
         private readonly IOptions<DataSeedingOptions> _dataSeedingOptions;
