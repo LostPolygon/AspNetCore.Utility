@@ -10,14 +10,14 @@ using Microsoft.Extensions.DependencyInjection;
 namespace LostPolygon.EntityFrameworkCore {
     public static class DatabaseExtensions {
         public static T AddInMemoryDbContext<T>(
-            IServiceCollection services,
+            this IServiceCollection services,
             Action<DbContextOptionsBuilder>? dbContextOptionsConfigureAction = null
             ) where T : DbContext {
             return AddSqliteDbContext<T>(services, "DataSource=:memory:", dbContextOptionsConfigureAction);
         }
 
         public static T AddSqliteDbContext<T>(
-            IServiceCollection services,
+            this IServiceCollection services,
             string connectionString,
             Action<DbContextOptionsBuilder>? dbContextOptionsConfigureAction = null
             ) where T : DbContext {
