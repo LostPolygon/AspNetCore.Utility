@@ -2,7 +2,7 @@ using System;
 using System.Linq.Expressions;
 using Microsoft.AspNetCore.Components;
 
-namespace Ballast.Atlantis.Web.Components {
+namespace LostPolygon.AspNetCore.Components {
     public class BindingPassComponentBase<T> : ComponentBase {
         [Parameter]
         public T Value { get; set; } = default!;

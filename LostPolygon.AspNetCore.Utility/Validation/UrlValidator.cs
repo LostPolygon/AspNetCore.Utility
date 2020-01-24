@@ -1,7 +1,7 @@
 using System;
 using FluentValidation.Validators;
 
-namespace Ballast.Atlantis.Utility {
+namespace LostPolygon.AspNetCore.Utility {
     public class UrlValidator : PropertyValidator {
         public UrlValidator()
             : base("{PropertyName} must be a valid URL.") {

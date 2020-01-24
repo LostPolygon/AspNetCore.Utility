@@ -1,6 +1,6 @@
 using Microsoft.Extensions.Configuration;
 
-namespace Ballast.Atlantis.Utility {
+namespace LostPolygon.AspNetCore.Utility {
     public class JsonFromEnvironmentVariableConfigurationSource : IConfigurationSource {
         public string EnvVariable { get; }
         public bool ClearEnvVariable { get; }

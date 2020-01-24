@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace Ballast.Atlantis.Utility {
+namespace LostPolygon.AspNetCore.Utility {
     public class ServicesPreBuilderService : IHostedService {
         private readonly IServiceCollection _services;
         private readonly IServiceProvider _serviceProvider;

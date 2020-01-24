@@ -1,7 +1,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace Ballast.Atlantis.Utility {
+namespace LostPolygon.AspNetCore.Utility {
     public class ValidGuidAttribute : ValidationAttribute {
         public ValidGuidAttribute()
             : base("The {0} field must be a valid GUID.") {

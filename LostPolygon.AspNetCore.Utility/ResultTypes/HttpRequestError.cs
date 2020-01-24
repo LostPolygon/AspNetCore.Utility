@@ -1,6 +1,6 @@
 using System.Net;
 
-namespace Ballast.Atlantis.Utility.ResultTypes {
+namespace LostPolygon.AspNetCore.Utility.ResultTypes {
     public struct HttpRequestError {
         public HttpStatusCode StatusCode { get; }
         public string ReasonPhrase { get; }

@@ -4,7 +4,7 @@ using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Ballast.Atlantis.Utility {
+namespace LostPolygon.AspNetCore.Utility {
     public static class StreamExtensions {
         public static async Task CopyToWithNotificationAsync(
             this Stream source,

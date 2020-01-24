@@ -4,7 +4,7 @@ using System.Net;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 
-namespace Ballast.Atlantis.Utility {
+namespace LostPolygon.AspNetCore.Utility.Api {
     public static class ApiProblemDetailsUtility {
         public static UnauthorizedObjectResult UnauthorizedApiProblemDetails(
             IDescriptiveError? error = null,

@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace Ballast.Atlantis.Utility {
+namespace LostPolygon.AspNetCore.Utility {
     public abstract class ScopedBackgroundService : BackgroundService {
         private readonly IServiceScopeFactory _serviceScopeFactory;
 

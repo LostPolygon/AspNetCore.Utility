@@ -4,7 +4,7 @@ using System.Reflection;
 using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Ballast.Atlantis.Utility {
+namespace LostPolygon.AspNetCore.Utility {
     public static class AttributeUtility {
         private delegate bool GetMemberNameFromAttributeImplementationDelegate(MemberInfo memberInfo, out string? attributeName);
         public static bool GetMemberNameFromJsonProperty<T>(Expression<Func<T>> expression, out string? jsonPropertyName) {

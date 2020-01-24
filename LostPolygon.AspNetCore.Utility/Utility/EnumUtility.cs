@@ -1,6 +1,6 @@
 using System;
 
-namespace Ballast.Atlantis.Utility {
+namespace LostPolygon.AspNetCore.Utility {
     public static class EnumUtility {
         public static TEnum? TryParseNullable<TEnum>(string value) where TEnum : struct, Enum {
             if (!Enum.TryParse(value, out TEnum result))

@@ -8,6 +8,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LostPolygon.AspNetCore.Util
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LostPolygon.AspNetCore.Utility.Web", "LostPolygon.AspNetCore.Utility.Web\LostPolygon.AspNetCore.Utility.Web.csproj", "{54AADCE4-C401-4167-BBA2-B86C3FCEFF95}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LostPolygon.EntityFrameworkCore", "LostPolygon.EntityFrameworkCore\LostPolygon.EntityFrameworkCore.csproj", "{A281BBA1-4836-408F-9940-DF5C7679638E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,9 @@ Global
 		{54AADCE4-C401-4167-BBA2-B86C3FCEFF95}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{54AADCE4-C401-4167-BBA2-B86C3FCEFF95}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{54AADCE4-C401-4167-BBA2-B86C3FCEFF95}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A281BBA1-4836-408F-9940-DF5C7679638E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A281BBA1-4836-408F-9940-DF5C7679638E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A281BBA1-4836-408F-9940-DF5C7679638E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A281BBA1-4836-408F-9940-DF5C7679638E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

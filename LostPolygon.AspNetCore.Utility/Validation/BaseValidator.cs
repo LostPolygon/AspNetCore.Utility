@@ -5,7 +5,7 @@ using FluentValidation;
 using FluentValidation.Internal;
 using FluentValidation.Results;
 
-namespace Ballast.Atlantis.Utility {
+namespace LostPolygon.AspNetCore.Utility {
     public abstract class BaseValidator<T> : AbstractValidator<T> {
         protected BaseValidator() : this(true, true) {
         }

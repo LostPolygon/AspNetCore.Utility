@@ -2,7 +2,7 @@ using System.Runtime.CompilerServices;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Ballast.Atlantis.Utility {
+namespace LostPolygon.AspNetCore.Utility {
     public abstract class AppServicesConfigurator<T> where T : ITuple {
         protected IServiceCollection Services { get; }
         protected IConfiguration Configuration { get; }

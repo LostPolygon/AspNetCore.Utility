@@ -3,7 +3,7 @@ using System.Linq;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Identity;
 
-namespace Ballast.Atlantis.Utility {
+namespace LostPolygon.AspNetCore.Utility {
     public static class ValidationUtility {
         public static IdentityResult ToIdentityResult(this ValidationResult validationResult) {
             IdentityResult result =

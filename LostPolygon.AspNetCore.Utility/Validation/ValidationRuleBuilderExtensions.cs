@@ -3,7 +3,7 @@ using System.Reflection;
 using FluentValidation;
 using FluentValidation.Internal;
 
-namespace Ballast.Atlantis.Utility {
+namespace LostPolygon.AspNetCore.Utility {
     public static class ValidationRuleBuilderExtensions {
         public static IRuleBuilderOptions<T, string> IsGuid<T>(this IRuleBuilderInitial<T, string> rule) {
             return rule.SetValidator(new GuidValidator());

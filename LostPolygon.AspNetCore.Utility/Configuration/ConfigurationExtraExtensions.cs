@@ -2,7 +2,7 @@ using System;
 using FluentValidation;
 using Microsoft.Extensions.Configuration;
 
-namespace Ballast.Atlantis.Utility {
+namespace LostPolygon.AspNetCore.Utility {
     public static class ConfigurationExtensions {
         public static T GetAndValidate<T, TValidator>(this IConfigurationSection section, Action<T>? beforeValidate = null)
             where TValidator : BaseOptionsValidator<T>, new() where T : class {

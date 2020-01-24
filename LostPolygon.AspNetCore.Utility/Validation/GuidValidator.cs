@@ -1,7 +1,7 @@
 using System;
 using FluentValidation.Validators;
 
-namespace Ballast.Atlantis.Utility {
+namespace LostPolygon.AspNetCore.Utility {
     public class GuidValidator : PropertyValidator {
         public GuidValidator()
             : base("{PropertyName} must be a valid GUID.") {

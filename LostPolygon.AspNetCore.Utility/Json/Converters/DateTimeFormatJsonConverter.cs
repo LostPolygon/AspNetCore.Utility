@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace Ballast.Atlantis.Utility {
+namespace LostPolygon.AspNetCore.Utility {
     public class DateTimeFormatJsonConverter : DateTimeFormatJsonConverterBase<DateTime> {
     }
 

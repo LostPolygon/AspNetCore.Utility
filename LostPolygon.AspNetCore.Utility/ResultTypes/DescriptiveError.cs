@@ -1,4 +1,4 @@
-namespace Ballast.Atlantis.Utility {
+namespace LostPolygon.AspNetCore.Utility {
     public interface IDescriptiveError {
         string Key { get; }
         string Message { get; }

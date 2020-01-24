@@ -1,7 +1,7 @@
 using System.Runtime.InteropServices;
 using TimeZoneConverter;
 
-namespace Ballast.Atlantis.Utility {
+namespace LostPolygon.AspNetCore.Utility {
     public static class TimeZoneUtility {
         private static readonly bool IsWindows = RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
 

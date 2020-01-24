@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Components.Rendering;
 
-namespace Ballast.Atlantis.Web.Components {
+namespace LostPolygon.AspNetCore.Components {
     public class FormlessEditForm : EditForm {
         protected override void OnParametersSet() {
             base.OnParametersSet();

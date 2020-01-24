@@ -1,7 +1,7 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 
-namespace Ballast.Atlantis.Utility {
+namespace LostPolygon.AspNetCore.Utility {
     public static class ModelStateDictionaryExtensions {
         public static void AddModelError<TError>(this ModelStateDictionary modelState, TError error) where TError : IDescriptiveError {
             modelState.AddModelError(error.Key, error.Message);

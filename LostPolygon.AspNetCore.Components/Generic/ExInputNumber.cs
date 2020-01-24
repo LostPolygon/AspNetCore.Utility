@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Components.Rendering;
 
-namespace Ballast.Atlantis.Web.Components {
+namespace LostPolygon.AspNetCore.Components {
     public class ExInputNumber<TValue> : InputNumber<TValue> {
         private static readonly FieldInfo _stepAttributeValueFieldInfo =
             typeof(InputNumber<TValue>).GetField("_stepAttributeValue", BindingFlags.Static | BindingFlags.NonPublic)!;

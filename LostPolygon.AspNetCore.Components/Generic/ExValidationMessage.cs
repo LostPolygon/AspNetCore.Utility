@@ -2,7 +2,7 @@ using System.Reflection;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Components.Rendering;
 
-namespace Ballast.Atlantis.Web.Components {
+namespace LostPolygon.AspNetCore.Components {
     public class ExValidationMessage<TValue> : ValidationMessage<TValue> {
         private static readonly PropertyInfo _currentEditContextPropertyInfo =
             typeof(ValidationMessage<TValue>).GetProperty(nameof(CurrentEditContext), BindingFlags.Instance | BindingFlags.NonPublic)!;

@@ -1,4 +1,4 @@
-namespace Ballast.Atlantis.Utility.ResultTypes {
+namespace LostPolygon.AspNetCore.Utility.ResultTypes {
     public struct Unauthorized {
     }
 }

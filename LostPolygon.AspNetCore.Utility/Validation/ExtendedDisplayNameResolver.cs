@@ -4,7 +4,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 using FluentValidation;
 
-namespace Ballast.Atlantis.Utility {
+namespace LostPolygon.AspNetCore.Utility {
     public static class ExtendedDisplayNameResolver {
         private static Func<Type, MemberInfo, LambdaExpression, string?> _defaultDisplayNameResolver;
         private static ConcurrentDictionary<MemberInfo, string?> _displayNameCache = new ConcurrentDictionary<MemberInfo, string?>();

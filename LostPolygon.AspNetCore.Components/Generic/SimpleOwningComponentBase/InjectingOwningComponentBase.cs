@@ -4,7 +4,7 @@ using System.Reflection;
 using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Ballast.Atlantis.Web.Components {
+namespace LostPolygon.AspNetCore.Components {
     public class InjectingOwningComponentBase : OwningComponentBase {
         private List<PropertyInfo> _props = null!;
 

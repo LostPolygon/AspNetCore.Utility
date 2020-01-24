@@ -1,10 +1,14 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Ballast.Atlantis {
-    public static class DatabaseUtility {
+namespace LostPolygon.EntityFrameworkCore {
+    public static class DatabaseExtensions {
         public static T AddInMemoryDbContext<T>(
             IServiceCollection services,
             Action<DbContextOptionsBuilder>? dbContextOptionsConfigureAction = null
@@ -28,6 +32,17 @@ namespace Ballast.Atlantis {
             dbContext.Database.EnsureCreated();
 
             return dbContext;
+        }
+
+        public static void AddOrUpdateExtension(this DbContextOptionsBuilder optionsBuilder, IDbContextOptionsExtension extension) {
+            ((IDbContextOptionsBuilderInfrastructure) optionsBuilder).AddOrUpdateExtension(extension);
+        }
+
+        public static void DetachAllEntries(this DbContext context) {
+            context.SaveChanges();
+            List<EntityEntry> changedEntriesCopy = context.ChangeTracker.Entries().ToList();
+            foreach (EntityEntry entry in changedEntriesCopy)
+                entry.State = EntityState.Detached;
         }
     }
 }

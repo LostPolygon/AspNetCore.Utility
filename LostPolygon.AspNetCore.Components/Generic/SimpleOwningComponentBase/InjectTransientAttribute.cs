@@ -1,6 +1,6 @@
 using System;
 
-namespace Ballast.Atlantis.Web.Components {
+namespace LostPolygon.AspNetCore.Components {
     public class InjectTransientAttribute : Attribute {
     }
 }

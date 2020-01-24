@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 
-namespace Ballast.Atlantis.Utility {
+namespace LostPolygon.AspNetCore.Utility {
     public abstract class AppConfigurator {
         protected IApplicationBuilder ApplicationBuilder { get; }
         protected IWebHostEnvironment Environment { get; }

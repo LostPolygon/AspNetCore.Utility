@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 
-namespace Ballast.Atlantis.Utility {
+namespace LostPolygon.AspNetCore.Utility.Api {
     public static class ControllerBaseExtensions {
         public static UnauthorizedObjectResult UnauthorizedApiProblemDetails(
             this ControllerBase controller,

@@ -6,7 +6,7 @@ using System.Text.RegularExpressions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Configuration.Json;
 
-namespace Ballast.Atlantis.Utility {
+namespace LostPolygon.AspNetCore.Utility {
     public class JsonFromEnvironmentVariableConfigurationProvider : ConfigurationProvider {
         private readonly JsonFromEnvironmentVariableConfigurationSource _configuration;
 

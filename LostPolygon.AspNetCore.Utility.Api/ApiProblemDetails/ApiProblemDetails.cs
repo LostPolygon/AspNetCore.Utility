@@ -5,7 +5,7 @@ using System.Net;
 using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 
-namespace Ballast.Atlantis.Utility {
+namespace LostPolygon.AspNetCore.Utility.Api {
     public class ApiProblemDetails {
         [JsonPropertyName("status")]
         public int StatusCode { get; }

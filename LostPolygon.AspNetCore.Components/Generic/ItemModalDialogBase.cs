@@ -3,7 +3,7 @@ using BlazorStrap;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 
-namespace Ballast.Atlantis.Web.Components.App {
+namespace LostPolygon.AspNetCore.Components.App {
     public abstract class ItemModalDialogBase<TItemViewModel> : ComponentBase where TItemViewModel : class {
         [Parameter]
         public EventCallback<TItemViewModel> OnCommitted { get; set; }

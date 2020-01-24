@@ -1,6 +1,6 @@
 using System;
 
-namespace Ballast.Atlantis.Web {
+namespace LostPolygon.AspNetCore.Utility.Web {
     public static class DataUrlUtility {
         public static string CreateDataUrl(string mimeType, byte[] data) {
             return String.Format(

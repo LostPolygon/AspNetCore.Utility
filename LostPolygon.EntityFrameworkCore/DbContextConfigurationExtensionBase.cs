@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Ballast.Atlantis {
+namespace LostPolygon.EntityFrameworkCore {
     public abstract class DbContextConfigurationExtensionBase : IDbContextConfigurationExtension {
         protected DbContextConfigurationExtensionBase() {
         }
