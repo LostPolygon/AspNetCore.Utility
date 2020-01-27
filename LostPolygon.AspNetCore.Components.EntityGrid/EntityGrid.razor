@@ -1,0 +1,38 @@
+@typeparam T
+
+<CascadingValue Value="this">
+    <!-- Filters -->
+    @if (ShowHeaderFilters) {
+        <div class="ui-bordered px-4 pt-4 mb-4">
+            <div class="form-row align-items-center">
+                @HeaderFilters
+            </div>
+        </div>
+    }
+    <!-- / Filters -->
+
+    <div class="card">
+        @BeforeTableContent
+
+        <div class="card-datatable table-responsive mx-">
+            <div class="row m-0">
+                @if (ItemsGrid != null) {
+                    <GridComponent
+                        T="T"
+                        @ref="@ItemsGridComponent"
+                        Grid="@ItemsGrid"
+                        TableCssClass="@("table table-striped table-bordered text-nowrap m-0" + (StickyFirstColumn ? "table-sticky-first-column" : ""))"
+                        GridMvcCssClass="w-100"
+                        GridCellCssClass="grid-cell align-middle"
+                        GridFooterCssClass="grid-footer ml-2 pl-1 text-muted"/>
+                    /*GridItemsCountCssClass="grid-itemscount d-block mb-2 text-muted"*/
+                }
+            </div>
+        </div>
+
+        @AfterTableContent
+    </div>
+
+    @AfterCardContent
+
+</CascadingValue>
