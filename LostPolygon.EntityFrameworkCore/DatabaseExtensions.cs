@@ -9,29 +9,43 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace LostPolygon.EntityFrameworkCore {
     public static class DatabaseExtensions {
-        public static T AddInMemoryDbContext<T>(
+        public static void AddInMemorySqliteDbContext<T>(
             this IServiceCollection services,
             Action<DbContextOptionsBuilder>? dbContextOptionsConfigureAction = null
-            ) where T : DbContext {
-            return AddSqliteDbContext<T>(services, "DataSource=:memory:", dbContextOptionsConfigureAction);
+        ) where T : DbContext {
+            AddSqliteDbContext<T>(services, "DataSource=:memory:", true, dbContextOptionsConfigureAction);
         }
 
-        public static T AddSqliteDbContext<T>(
+        public static void AddSqliteDbContext<T>(
             this IServiceCollection services,
             string connectionString,
             Action<DbContextOptionsBuilder>? dbContextOptionsConfigureAction = null
-            ) where T : DbContext {
-            SqliteConnection connection = new SqliteConnection(connectionString);
-            connection.Open();
+        ) where T : DbContext {
+            AddSqliteDbContext<T>(services, connectionString, false, dbContextOptionsConfigureAction);
+        }
+
+        private static void AddSqliteDbContext<T>(
+            this IServiceCollection services,
+            string connectionString,
+            bool singleConnection,
+            Action<DbContextOptionsBuilder>? dbContextOptionsConfigureAction = null
+        ) where T : DbContext {
+            SqliteConnection connection = null!;
+            if (singleConnection) {
+                connection = new SqliteConnection(connectionString);
+                connection.Open();
+            }
+
             services.AddDbContext<T>(options => {
-                options.UseSqlite(connection);
+                if (singleConnection) {
+                    options.UseSqlite(connection!);
+                }
+                else {
+                    options.UseSqlite(connectionString);
+                }
+
                 dbContextOptionsConfigureAction?.Invoke(options);
             });
-            T dbContext = services.BuildServiceProvider().GetService<T>();
-            dbContext.Database.OpenConnection();
-            dbContext.Database.EnsureCreated();
-
-            return dbContext;
         }
 
         public static void AddOrUpdateExtension(this DbContextOptionsBuilder optionsBuilder, IDbContextOptionsExtension extension) {

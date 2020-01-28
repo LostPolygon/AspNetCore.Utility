@@ -14,7 +14,7 @@ namespace LostPolygon.AspNetCore.Components.EntityGrid {
         public Func<IReadOnlyList<T>> Items { get; set; } = null!;
 
         [Parameter]
-        public bool ShowHeaderFilters { get; set; } = true;
+        public bool ShowHeaderFilters { get; set; } = false;
 
         [Parameter]
         public RenderFragment HeaderFilters { get; set; } = null!;
