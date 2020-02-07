@@ -1,3 +1,4 @@
+using System;
 using System.Runtime.InteropServices;
 using TimeZoneConverter;
 
@@ -12,6 +13,20 @@ namespace LostPolygon.AspNetCore.Utility {
                 return TZConvert.WindowsToIana(windowsTimeZoneId, "001");
 
             return windowsTimeZoneId;
+        }
+
+        public static string GetDisplayNameSafe(this TimeZoneInfo timeZoneInfo) {
+            string name = timeZoneInfo.DisplayName;
+            if (!String.IsNullOrWhiteSpace(name))
+                return name;
+
+            name = timeZoneInfo.StandardName;
+            if (String.IsNullOrWhiteSpace(name)) {
+                name = timeZoneInfo.Id;
+            }
+
+            name = $"(UTC{TimeSpanUtility.FormatTimeZoneOffset(timeZoneInfo.BaseUtcOffset)}) {name}";
+            return name;
         }
     }
 }

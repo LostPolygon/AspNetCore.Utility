@@ -43,7 +43,10 @@ namespace LostPolygon.AspNetCore.Components.EntityGrid {
             Filters.Add(filter);
         }
 
-        protected override async Task OnInitializedAsync() {
+        protected override async Task OnAfterRenderAsync(bool firstRender) {
+            if (!firstRender)
+                return;
+
             Items = Items ?? throw new ArgumentNullException(nameof(Items));
             FilteredItems = new List<T>(Items().Count);
 
@@ -57,6 +60,7 @@ namespace LostPolygon.AspNetCore.Components.EntityGrid {
 
             ItemsGrid = itemsGridClient.Grid;
             await ApplyFilters();
+            StateHasChanged();
         }
 
         protected virtual IGridClient<T> CreateClient(IGridClient<T> client) {
