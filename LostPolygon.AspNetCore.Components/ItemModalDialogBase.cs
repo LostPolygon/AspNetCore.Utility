@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using System.Threading.Tasks;
 using BlazorStrap;
 using Microsoft.AspNetCore.Components;
@@ -8,11 +9,11 @@ namespace LostPolygon.AspNetCore.Components {
         [Parameter]
         public EventCallback<TItemViewModel> OnCommitted { get; set; }
 
-        protected TItemViewModel ViewModel { get; private set; } = null!;
+        protected TItemViewModel? ViewModel { get; private set; } = null!;
 
         protected BSModal Modal { get; set; } = null!;
 
-        protected EditContext EditContext { get; private set; } = null!;
+        protected EditContext? EditContext { get; private set; }
 
         protected void Open() {
             ViewModel = CreateItemViewModel();
@@ -29,6 +30,7 @@ namespace LostPolygon.AspNetCore.Components {
         }
 
         protected virtual async Task OnCommitClicked() {
+            Debug.Assert(EditContext != null, "EditContext != null");
             bool valid = EditContext.Validate();
             if (!valid)
                 return;
@@ -36,6 +38,7 @@ namespace LostPolygon.AspNetCore.Components {
             bool success = await Commit();
             Modal.Hide();
 
+            Debug.Assert(ViewModel != null, "ViewModel != null");
             if (success) {
                 await OnCommitted.InvokeAsync(ViewModel);
             }
