@@ -21,5 +21,8 @@ namespace LostPolygon.AspNetCore.Components.EntityGrid {
         }
 
         public abstract bool Filter(T item);
+
+        public virtual void NotifyGridInitialized() {
+        }
     }
 }

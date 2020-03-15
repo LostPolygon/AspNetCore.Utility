@@ -13,18 +13,27 @@ using Microsoft.Extensions.Primitives;
 namespace LostPolygon.AspNetCore.Components.EntityGrid {
     public static class GridBlazorUtility {
         public static IReadOnlyDictionary<T, IReadOnlyList<(IGridColumn<T> column, object displayValue)>>
-            GetGridDisplayValues<T>(IGrid grid, IReadOnlyList<T> items) where T : notnull {
+            GetGridDisplayValues<T>(IGrid grid, IReadOnlyList<T> items, Dictionary<IGridColumn<T>, Func<T, string>>? customColumnValueGetters = null) where T : notnull {
             IGridColumnCollection columns = grid.Columns;
 
             var rawResult = new List<List<(IGridColumn<T> column, object displayValue)>>(items.Count);
-            foreach (T item in items) {
+            foreach (T unused in items) {
                 rawResult.Add(new List<(IGridColumn<T> column, object displayValue)>());
             }
 
             foreach (GridColumnBase<T> gridColumn in columns) {
                 for (int i = 0; i < items.Count; i++) {
                     T item = items[i];
-                    string value = gridColumn.HasConstraint ? gridColumn.GetValue(item).Value : "";
+                    string value = "";
+                    if (gridColumn.HasConstraint) {
+                        value = gridColumn.GetValue(item).Value;
+                    }
+                    else if (customColumnValueGetters != null) {
+                        if (customColumnValueGetters.TryGetValue(gridColumn, out Func<T, string>? customValueGetter)) {
+                            value = customValueGetter(item);
+                        }
+                    }
+
                     rawResult[i].Add((gridColumn, value));
                 }
             }

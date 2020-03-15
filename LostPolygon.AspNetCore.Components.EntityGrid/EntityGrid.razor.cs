@@ -6,6 +6,7 @@ using GridBlazor;
 using GridBlazor.Pages;
 using GridMvc.Server;
 using GridShared;
+using GridShared.Columns;
 using Microsoft.AspNetCore.Components;
 
 namespace LostPolygon.AspNetCore.Components.EntityGrid {
@@ -33,11 +34,25 @@ namespace LostPolygon.AspNetCore.Components.EntityGrid {
 
         public CGrid<T> ItemsGrid { get; private set; } = null!;
 
+        public Dictionary<IGridColumn<T>, Func<T, string>>? CustomColumnValueGetters { get; private set; } = null!;
+
         private GridComponent<T> ItemsGridComponent = null!;
         private List<T> FilteredItems { get; set; } = null!;
         private List<EntityGridFilterBase<T>> Filters { get; set; } = new List<EntityGridFilterBase<T>>();
 
-        protected abstract void CnCreatingColumnsConfiguration(IGridColumnCollection<T> columns);
+        protected abstract void CnCreatingColumnsConfiguration(
+            IGridColumnCollection<T> columns,
+            out Dictionary<IGridColumn<T>, Func<T, string>>? customColumnValueGetters
+        );
+
+        protected virtual void CnCreatingColumnsConfiguration(IGridColumnCollection<T> columns) {
+            CnCreatingColumnsConfiguration(columns, out Dictionary<IGridColumn<T>, Func<T, string>>? customColumnValueGetters);
+
+            // Call with GridBlazor.Columns.GridColumnCollection happens first
+            if (CustomColumnValueGetters == null) {
+                CustomColumnValueGetters = customColumnValueGetters;
+            }
+        }
 
         public void AddFilter(EntityGridFilterBase<T> filter) {
             Filters.Add(filter);
@@ -57,6 +72,8 @@ namespace LostPolygon.AspNetCore.Components.EntityGrid {
                     server => CreateServer(server),
                     client => CreateClient(client)
                 );
+
+            Filters.ForEach(f => f.NotifyGridInitialized());
 
             ItemsGrid = itemsGridClient.Grid;
             await ApplyFilters();
