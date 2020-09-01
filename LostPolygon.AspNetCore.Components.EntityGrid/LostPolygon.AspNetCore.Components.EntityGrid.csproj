@@ -10,8 +10,8 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="GridBlazor" Version="1.6.9" />
-        <PackageReference Include="GridMvcCore" Version="2.15.4" />
+        <PackageReference Include="GridBlazor" Version="1.8.6" />
+        <PackageReference Include="GridMvcCore" Version="3.1.4" />
     </ItemGroup>
 
 </Project>
