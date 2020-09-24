@@ -10,7 +10,6 @@ namespace LostPolygon.EntityFrameworkCore {
             => fromData.Kind == DateTimeKind.Unspecified ? DateTime.SpecifyKind(fromData, DateTimeKind.Utc) : fromData.ToUniversalTime();
 
         public static PropertyBuilder<DateTime?> UsesUtc(this PropertyBuilder<DateTime?> property) {
-            return property;
             string? name = property.Metadata.Name;
             return property.HasConversion<DateTime?>(
                 fromCode => fromCode != null ? FromCodeToData(fromCode.Value, name) : default,
@@ -19,7 +18,6 @@ namespace LostPolygon.EntityFrameworkCore {
         }
 
         public static PropertyBuilder<DateTime> UsesUtc(this PropertyBuilder<DateTime> property) {
-            return property;
             string? name = property.Metadata.Name;
             return property.HasConversion(fromCode => FromCodeToData(fromCode, name), fromData => FromDataToCode(fromData));
         }
