@@ -21,7 +21,10 @@ namespace LostPolygon.AspNetCore.Utility {
                 if (reader.TokenType != JsonTokenType.PropertyName)
                     throw new JsonException($"Unexpected token. Expected property name, got {reader.TokenType}");
 
-                string key = reader.GetString();
+                string? key = reader.GetString();
+                if (key == null)
+                    throw new JsonException($"Expected string, token {reader.TokenType}");
+
                 reader.Read();
 
                 object? value;

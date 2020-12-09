@@ -15,7 +15,7 @@ namespace LostPolygon.AspNetCore.Components {
             // If _fixedEditContext changes, tear down and recreate all descendants.
             // This is so we can safely use the IsFixed optimization on CascadingValue,
             // optimizing for the common case where _fixedEditContext never changes.
-            builder.OpenRegion(EditContext.GetHashCode());
+            builder.OpenRegion(EditContext!.GetHashCode());
 
             builder.OpenElement(0, "span");
             builder.AddMultipleAttributes(1, AdditionalAttributes);

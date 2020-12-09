@@ -7,12 +7,12 @@ namespace LostPolygon.AspNetCore.Utility {
             : base("The {0} field must be a valid GUID.") {
         }
 
-        protected override ValidationResult IsValid(object value, ValidationContext validationContext) {
+        protected override ValidationResult? IsValid(object? value, ValidationContext validationContext) {
             string? valueString = value as string;
             if (valueString == null || !Guid.TryParseExact(valueString, "D", out _))
                 return new ValidationResult(
                     String.Format(ErrorMessageString, validationContext.DisplayName),
-                    new[] { validationContext.MemberName }
+                    new[] { validationContext.MemberName! }
                 );
 
             return ValidationResult.Success;

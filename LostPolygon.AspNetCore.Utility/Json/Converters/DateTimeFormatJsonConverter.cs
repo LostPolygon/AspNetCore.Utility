@@ -48,8 +48,7 @@ namespace LostPolygon.AspNetCore.Utility {
             if (reader.TokenType != JsonTokenType.String)
                 throw new JsonException($"Unexpected token parsing date. Expected {nameof(JsonTokenType.String)}, got {reader.TokenType}");
 
-            string dateText = reader.GetString();
-
+            string? dateText = reader.GetString();
             if (String.IsNullOrEmpty(dateText))
                 throw new JsonException("Unexpected token parsing date. Got empty String");
 

@@ -34,13 +34,13 @@ namespace LostPolygon.AspNetCore.Components {
                 .ToList();
 
             foreach (PropertyInfo propertyInfo in _props) {
-                object service = ScopedServices.GetService(propertyInfo.PropertyType);
+                object service = ScopedServices.GetRequiredService(propertyInfo.PropertyType);
                 propertyInfo.SetValue(this, service);
             }
         }
 
-        protected T GetScopedService<T>() {
-            return ScopedServices.GetService<T>();
+        protected T GetScopedService<T>() where T : notnull {
+            return ScopedServices.GetRequiredService<T>();
         }
     }
 }
