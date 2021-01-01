@@ -15,7 +15,8 @@ namespace CompressedStaticFiles {
     public class CompressedStaticFileMiddleware {
         private static Dictionary<string, string> compressionTypes =
             new Dictionary<string, string>() {
-                { "gzip", ".gz" }, { "br", ".br" }
+                { "gzip", ".gz" },
+                { "br", ".br" }
             };
 
         private readonly IOptions<StaticFileOptions> _staticFileOptions;
@@ -45,8 +46,8 @@ namespace CompressedStaticFiles {
         }
 
         private static void InitializeStaticFileOptions(IWebHostEnvironment hostingEnv, IOptions<StaticFileOptions> staticFileOptions) {
-            staticFileOptions.Value.FileProvider = staticFileOptions.Value.FileProvider ?? hostingEnv.WebRootFileProvider;
-            var contentTypeProvider = staticFileOptions.Value.ContentTypeProvider ?? new FileExtensionContentTypeProvider();
+            staticFileOptions.Value.FileProvider ??= hostingEnv.WebRootFileProvider;
+            IContentTypeProvider? contentTypeProvider = staticFileOptions.Value.ContentTypeProvider ?? new FileExtensionContentTypeProvider();
             if (contentTypeProvider is FileExtensionContentTypeProvider fileExtensionContentTypeProvider) {
                 // the StaticFileProvider would not serve the file if it does not know the content-type
                 fileExtensionContentTypeProvider.Mappings[".br"] = "application/brotli";
@@ -54,11 +55,11 @@ namespace CompressedStaticFiles {
 
             staticFileOptions.Value.ContentTypeProvider = contentTypeProvider;
 
-            var originalPrepareResponse = staticFileOptions.Value.OnPrepareResponse;
+            Action<StaticFileResponseContext>? originalPrepareResponse = staticFileOptions.Value.OnPrepareResponse;
             staticFileOptions.Value.OnPrepareResponse = ctx => {
                 originalPrepareResponse(ctx);
-                foreach (var compressionType in compressionTypes.Keys) {
-                    var fileExtension = compressionTypes[compressionType];
+                foreach (string? compressionType in compressionTypes.Keys) {
+                    string? fileExtension = compressionTypes[compressionType];
                     if (ctx.File.Name.EndsWith(fileExtension, StringComparison.OrdinalIgnoreCase)) {
                         // we need to restore the original content type, otherwise it would be based on the compression type
                         // (for example "application/brotli" instead of "text/html")
@@ -81,20 +82,20 @@ namespace CompressedStaticFiles {
         }
 
         private void ProcessRequest(HttpContext context) {
-            var fileSystem = _staticFileOptions.Value.FileProvider;
-            var originalFile = fileSystem.GetFileInfo(context.Request.Path);
+            IFileProvider? fileSystem = _staticFileOptions.Value.FileProvider;
+            IFileInfo? originalFile = fileSystem.GetFileInfo(context.Request.Path);
 
             if (!originalFile.Exists) {
                 return;
             }
 
-            var supportedEncodings = GetSupportedEncodings(context);
+            IEnumerable<string>? supportedEncodings = GetSupportedEncodings(context);
 
             // try to find a compressed version of the file and ensure that it is smaller than the uncompressed version
             IFileInfo matchedFile = originalFile;
-            foreach (var compressionType in supportedEncodings) {
-                var fileExtension = compressionTypes[compressionType];
-                var file = fileSystem.GetFileInfo(context.Request.Path + fileExtension);
+            foreach (string? compressionType in supportedEncodings) {
+                string? fileExtension = compressionTypes[compressionType];
+                IFileInfo? file = fileSystem.GetFileInfo(context.Request.Path + fileExtension);
                 if (file.Exists && file.Length < matchedFile.Length) {
                     matchedFile = file;
                 }
@@ -102,7 +103,7 @@ namespace CompressedStaticFiles {
 
             if (matchedFile != originalFile) {
                 // a compressed version exists and is smaller, change the path to serve the compressed file
-                var matchedPath = context.Request.Path.Value + Path.GetExtension(matchedFile.Name);
+                string? matchedPath = context.Request.Path.Value + Path.GetExtension(matchedFile.Name);
                 //_logger.LogFileServed(context.Request.Path.Value, matchedPath, originalFile.Length, matchedFile.Length);
                 context.Request.Path = new PathString(matchedPath);
             }
@@ -112,8 +113,8 @@ namespace CompressedStaticFiles {
         /// Find the encodings that are supported by the browser and by this middleware
         /// </summary>
         private static IEnumerable<string> GetSupportedEncodings(HttpContext context) {
-            var browserSupportedCompressionTypes = context.Request.Headers["Accept-Encoding"].ToString().Split(new[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries);
-            var validCompressionTypes = compressionTypes.Keys.Intersect(browserSupportedCompressionTypes, StringComparer.OrdinalIgnoreCase);
+            string[]? browserSupportedCompressionTypes = context.Request.Headers["Accept-Encoding"].ToString().Split(new[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries);
+            IEnumerable<string>? validCompressionTypes = compressionTypes.Keys.Intersect(browserSupportedCompressionTypes, StringComparer.OrdinalIgnoreCase);
             return validCompressionTypes;
         }
     }

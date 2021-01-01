@@ -8,11 +8,7 @@ namespace LostPolygon.AspNetCore.Utility {
         }
 
         protected override bool IsValid(PropertyValidatorContext context) {
-            string? valueString = context.PropertyValue as string;
-            if (valueString == null || !Guid.TryParseExact(valueString, "D", out _))
-                return false;
-
-            return true;
+            return context.PropertyValue is string valueString && Guid.TryParseExact(valueString, "D", out _);
         }
     }
 }
