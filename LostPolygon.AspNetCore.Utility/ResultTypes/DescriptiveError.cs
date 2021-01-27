@@ -25,7 +25,7 @@ namespace LostPolygon.AspNetCore.Utility {
             AttemptedValue = null;
         }
 
-        public DescriptiveError(string key, string message, object attemptedValue) : this(key, message) {
+        public DescriptiveError(string key, string message, object? attemptedValue) : this(key, message) {
             AttemptedValue = attemptedValue;
         }
 
@@ -45,7 +45,7 @@ namespace LostPolygon.AspNetCore.Utility {
             AttemptedValue = null;
         }
 
-        public DescriptiveError(string key, string message, object attemptedValue) : this(key, message) {
+        public DescriptiveError(string key, string message, object? attemptedValue) : this(key, message) {
             AttemptedValue = attemptedValue;
         }
 

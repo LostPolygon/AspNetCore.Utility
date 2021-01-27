@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
@@ -57,6 +59,17 @@ namespace LostPolygon.EntityFrameworkCore {
             List<EntityEntry> changedEntriesCopy = context.ChangeTracker.Entries().ToList();
             foreach (EntityEntry entry in changedEntriesCopy)
                 entry.State = EntityState.Detached;
+        }
+
+        public static async Task<object> ExecuteScalarResultSqlCommand(this DbContext context, string rawSql) {
+            await using DbCommand command = context.Database.GetDbConnection().CreateCommand();
+            await command.Connection.OpenAsync();
+            command.CommandText = rawSql;
+
+            object result = command.ExecuteScalar();
+            await command.Connection.CloseAsync();
+
+            return result;
         }
     }
 }
