@@ -21,11 +21,12 @@
                         T="T"
                         @ref="@ItemsGridComponent"
                         Grid="@ItemsGrid"
-                        TableCssClass="@("table table-striped table-bordered text-nowrap m-0 " + (StickyFirstColumn ? "table-sticky-first-column" : ""))"
-                        GridMvcCssClass="w-100"
-                        GridWrapCssClass="grid-wrap"
-                        GridCellCssClass="grid-cell align-middle"
-                        GridFooterCssClass="grid-footer ml-2 pl-1 text-muted"/>
+                        TableWrapCssClass="@TableWrapCssClass"
+                        TableCssClass="@TableCssClass"
+                        GridMvcCssClass="@GridMvcCssClass"
+                        GridWrapCssClass="@GridWrapCssClass"
+                        GridCellCssClass="@GridCellCssClass"
+                        GridFooterCssClass="@GridFooterCssClass"/>
                 }
                 else {
                     <div class="d-flex w-100 justify-content-center">

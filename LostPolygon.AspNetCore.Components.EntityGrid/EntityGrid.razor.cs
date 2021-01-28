@@ -113,5 +113,13 @@ namespace LostPolygon.AspNetCore.Components.EntityGrid {
                 await ItemsGrid.UpdateGrid();
             }
         }
+
+        protected virtual string TableCssClass =>
+            "table table-striped table-bordered text-nowrap m-0 " + (StickyFirstColumn ? "table-sticky-first-column" : "");
+        protected virtual string TableWrapCssClass => "table-wrap overflow-auto";
+        protected virtual string GridMvcCssClass => "w-100";
+        protected virtual string GridWrapCssClass => "grid-wrap";
+        protected virtual string GridCellCssClass => "grid-cell align-middle";
+        protected virtual string GridFooterCssClass => "grid-footer ml-2 pl-1 text-muted";
     }
 }
