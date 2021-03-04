@@ -3,8 +3,24 @@ namespace LostPolygon.AspNetCore.Utility {
         string Key { get; }
         string Message { get; }
         object? AttemptedValue { get; }
+    }
 
-        string? ToStringInternal() {
+    public abstract class DescriptiveErrorBase : IDescriptiveError {
+        public string Key { get; }
+        public string Message { get; }
+        public object? AttemptedValue { get; }
+
+        protected DescriptiveErrorBase(string key, string message) {
+            Key = key;
+            Message = message;
+            AttemptedValue = null;
+        }
+
+        protected DescriptiveErrorBase(string key, string message, object? attemptedValue) : this(key, message) {
+            AttemptedValue = attemptedValue;
+        }
+
+        public override string? ToString() {
             string result = $"{Key}: {Message}";
             if (AttemptedValue != null) {
                 result += $" (attempted value {AttemptedValue})";
@@ -14,43 +30,19 @@ namespace LostPolygon.AspNetCore.Utility {
         }
     }
 
-    public struct DescriptiveError : IDescriptiveError {
-        public string Key { get; }
-        public string Message { get; }
-        public object? AttemptedValue { get; }
-
-        public DescriptiveError(string key, string message) {
-            Key = key;
-            Message = message;
-            AttemptedValue = null;
+    public class DescriptiveError : DescriptiveErrorBase {
+        public DescriptiveError(string key, string message) : base(key, message) {
         }
 
-        public DescriptiveError(string key, string message, object? attemptedValue) : this(key, message) {
-            AttemptedValue = attemptedValue;
-        }
-
-        public override string? ToString() {
-            return ((IDescriptiveError) this).ToStringInternal();
+        public DescriptiveError(string key, string message, object? attemptedValue) : base(key, message, attemptedValue) {
         }
     }
 
-    public struct DescriptiveError<T> : IDescriptiveError {
-        public string Key { get; }
-        public string Message { get; }
-        public object? AttemptedValue { get; }
-
-        public DescriptiveError(string key, string message) {
-            Key = key;
-            Message = message;
-            AttemptedValue = null;
+    public class DescriptiveError<T> : DescriptiveErrorBase {
+        public DescriptiveError(string key, string message) : base(key, message) {
         }
 
-        public DescriptiveError(string key, string message, object? attemptedValue) : this(key, message) {
-            AttemptedValue = attemptedValue;
-        }
-
-        public override string? ToString() {
-            return ((IDescriptiveError) this).ToStringInternal();
+        public DescriptiveError(string key, string message, object? attemptedValue) : base(key, message, attemptedValue) {
         }
     }
 }
