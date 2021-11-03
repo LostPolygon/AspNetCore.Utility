@@ -21,7 +21,8 @@ namespace LostPolygon.AspNetCore.Components.EntityGrid {
                 rawResult.Add(new List<(IGridColumn<T> column, object displayValue)>());
             }
 
-            foreach (GridColumnBase<T> gridColumn in columns) {
+            foreach (IGridColumn? gridColumnUnknown in columns) {
+                GridColumnBase<T> gridColumn = (GridColumnBase<T>) gridColumnUnknown;
                 for (int i = 0; i < items.Count; i++) {
                     T item = items[i];
                     string value = "";

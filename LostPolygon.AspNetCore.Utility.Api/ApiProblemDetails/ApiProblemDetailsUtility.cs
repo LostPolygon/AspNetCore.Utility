@@ -41,8 +41,7 @@ namespace LostPolygon.AspNetCore.Utility.Api {
             where T : ObjectResult {
             if (modelState == null && error == null)
                 throw new ArgumentException(
-                    $"At least one of '{nameof(modelState)}' and " +
-                    $"{nameof(error)} parameters must be non-null");
+                    $"At least one of '{nameof(modelState)}' and {nameof(error)} parameters must be non-null");
 
             modelState ??= new ModelStateDictionary();
 
