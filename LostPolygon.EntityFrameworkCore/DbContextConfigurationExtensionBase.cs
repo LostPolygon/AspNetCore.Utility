@@ -24,8 +24,12 @@ namespace LostPolygon.EntityFrameworkCore {
             public DbContextOptionsExtensionInfoInternal(IDbContextOptionsExtension extension) : base(extension) {
             }
 
-            public override long GetServiceProviderHashCode() {
+            public override int GetServiceProviderHashCode() {
                 return 0;
+            }
+
+            public override bool ShouldUseSameServiceProvider(DbContextOptionsExtensionInfo other) {
+                return true;
             }
 
             public override void PopulateDebugInfo(IDictionary<string, string> debugInfo) {

@@ -47,7 +47,7 @@ namespace LostPolygon.AspNetCore.Utility {
             return nameFromAttributeImplementationDelegate(propertyInfo, out name);
         }
 
-        private static bool GetMemberNameFromAttribute<TAttribute>(MemberInfo memberInfo, Func<TAttribute, string> getNameFunc, out string? name)
+        private static bool GetMemberNameFromAttribute<TAttribute>(MemberInfo memberInfo, Func<TAttribute, string?> getNameFunc, out string? name)
             where TAttribute : Attribute {
             name = null;
             TAttribute? attribute = memberInfo.GetCustomAttribute<TAttribute>();

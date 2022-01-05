@@ -82,7 +82,7 @@ namespace CompressedStaticFiles {
         }
 
         private void ProcessRequest(HttpContext context) {
-            IFileProvider? fileSystem = _staticFileOptions.Value.FileProvider;
+            IFileProvider fileSystem = _staticFileOptions.Value.FileProvider!;
             IFileInfo? originalFile = fileSystem.GetFileInfo(context.Request.Path);
 
             if (!originalFile.Exists) {

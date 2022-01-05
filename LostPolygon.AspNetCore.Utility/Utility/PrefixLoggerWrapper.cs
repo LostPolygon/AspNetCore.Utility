@@ -19,8 +19,8 @@ namespace LostPolygon.AspNetCore.Utility {
             return _loggerImplementation.IsEnabled(logLevel);
         }
 
-        public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter) {
-            string PrefixFormatter(TState sourceState, Exception sourceException) => _prefix + formatter(sourceState, sourceException);
+        public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception? exception, Func<TState, Exception?, string> formatter) {
+            string PrefixFormatter(TState sourceState, Exception? sourceException) => _prefix + formatter(sourceState, sourceException);
 
             _loggerImplementation.Log(logLevel, eventId, state, exception, PrefixFormatter);
         }

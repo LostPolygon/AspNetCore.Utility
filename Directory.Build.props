@@ -1,7 +1,7 @@
 <Project>
     <PropertyGroup>
         <Nullable>enable</Nullable>
-        <LangVersion>8.0</LangVersion>
+        <LangVersion>10.0</LangVersion>
         <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
         <WarningsNotAsErrors>0162</WarningsNotAsErrors>
     </PropertyGroup>

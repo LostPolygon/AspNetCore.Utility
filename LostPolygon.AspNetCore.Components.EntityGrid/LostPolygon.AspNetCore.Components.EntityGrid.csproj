@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
     <PropertyGroup>
-        <TargetFramework>net5.0</TargetFramework>
+        <TargetFramework>net6.0</TargetFramework>
         <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
     </PropertyGroup>
 
@@ -10,8 +10,8 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="GridBlazor" Version="2.1.2" />
-        <PackageReference Include="GridMvcCore" Version="4.1.2" />
+        <PackageReference Include="GridBlazor" Version="3.0.3" />
+        <PackageReference Include="GridMvcCore" Version="5.0.2" />
     </ItemGroup>
 
 </Project>
