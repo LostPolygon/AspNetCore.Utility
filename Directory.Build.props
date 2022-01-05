@@ -5,13 +5,4 @@
         <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
         <WarningsNotAsErrors>0162</WarningsNotAsErrors>
     </PropertyGroup>
-
-    <Target Name="DisableAnalyzersForDotnetExeBuild" BeforeTargets="CoreCompile" Condition="'$(MSBuildRuntimeType)'=='Core'">
-        <!--
-        Disable analyzers via an MSBuild property settable on the command line.
-        -->
-        <ItemGroup>
-            <Analyzer Remove="@(Analyzer)" />
-        </ItemGroup>
-    </Target>
 </Project>
