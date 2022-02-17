@@ -4,7 +4,7 @@ using BlazorStrap;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 
-namespace LostPolygon.AspNetCore.Components; 
+namespace LostPolygon.AspNetCore.Components;
 
 public abstract class ItemModalDialogBase<TItemViewModel> : ComponentBase where TItemViewModel : class {
     [Parameter]
@@ -19,7 +19,7 @@ public abstract class ItemModalDialogBase<TItemViewModel> : ComponentBase where 
     protected void Open() {
         ViewModel = CreateItemViewModel();
         EditContext = new EditContext(ViewModel);
-        Modal.Show();
+        Modal.ShowAsync();
     }
 
     protected abstract TItemViewModel CreateItemViewModel();
@@ -27,7 +27,7 @@ public abstract class ItemModalDialogBase<TItemViewModel> : ComponentBase where 
     protected abstract Task<bool> Commit();
 
     protected virtual void OnCloseClicked() {
-        Modal.Hide();
+        Modal.HideAsync();
     }
 
     protected virtual async Task OnCommitClicked() {
@@ -37,7 +37,7 @@ public abstract class ItemModalDialogBase<TItemViewModel> : ComponentBase where 
             return;
 
         bool success = await Commit();
-        Modal.Hide();
+        await Modal.HideAsync();
 
         Debug.Assert(ViewModel != null, "ViewModel != null");
         if (success) {
