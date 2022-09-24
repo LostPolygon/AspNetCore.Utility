@@ -1,14 +1,17 @@
 using System;
 using FluentValidation.Validators;
 
-namespace LostPolygon.AspNetCore.Utility; 
+namespace LostPolygon.AspNetCore.Utility;
 
 public class GuidValidator : PropertyValidator {
-    public GuidValidator()
+    public string GuidFormat { get; }
+
+    public GuidValidator(string guidFormat = "D")
         : base("{PropertyName} must be a valid GUID.") {
+        GuidFormat = guidFormat;
     }
 
     protected override bool IsValid(PropertyValidatorContext context) {
-        return context.PropertyValue is string valueString && Guid.TryParseExact(valueString, "D", out _);
+        return context.PropertyValue is string valueString && Guid.TryParseExact(valueString, GuidFormat, out _);
     }
 }
