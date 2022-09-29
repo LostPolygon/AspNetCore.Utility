@@ -16,13 +16,13 @@ public interface IDescriptiveError {
 }
 
 public readonly record struct DescriptiveError(string Key, string Message, object? AttemptedValue = null) : IDescriptiveError {
-    public override string? ToString() {
+    public override string ToString() {
         return ((IDescriptiveError) this).ToStringInternal();
     }
 }
 
 public readonly record struct DescriptiveError<T>(string Key, string Message, object? AttemptedValue = null) : IDescriptiveError {
-    public override string? ToString() {
+    public override string ToString() {
         return ((IDescriptiveError) this).ToStringInternal();
     }
 }
