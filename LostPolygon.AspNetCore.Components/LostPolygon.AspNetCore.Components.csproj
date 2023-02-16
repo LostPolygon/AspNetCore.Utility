@@ -14,7 +14,8 @@
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="BlazorStrap" Version="5.0.103" />
+      <PackageReference Include="BlazorStrap" Version="5.1.100" />
+      <PackageReference Include="BlazorStrap.V4" Version="5.1.100" />
     </ItemGroup>
 
 </Project>
