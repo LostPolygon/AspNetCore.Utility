@@ -1,17 +1,17 @@
 using Microsoft.Extensions.Configuration;
 
-namespace LostPolygon.AspNetCore.Utility {
-    public class JsonFromEnvironmentVariableConfigurationSource : IConfigurationSource {
-        public string EnvVariable { get; }
-        public bool ClearEnvVariable { get; }
+namespace LostPolygon.AspNetCore.Utility; 
 
-        public JsonFromEnvironmentVariableConfigurationSource(string envVariable, bool clearEnvVariable) {
-            EnvVariable = envVariable;
-            ClearEnvVariable = clearEnvVariable;
-        }
+public class JsonFromEnvironmentVariableConfigurationSource : IConfigurationSource {
+    public string EnvVariable { get; }
+    public bool ClearEnvVariable { get; }
 
-        public IConfigurationProvider Build(IConfigurationBuilder builder) {
-            return new JsonFromEnvironmentVariableConfigurationProvider(this);
-        }
+    public JsonFromEnvironmentVariableConfigurationSource(string envVariable, bool clearEnvVariable) {
+        EnvVariable = envVariable;
+        ClearEnvVariable = clearEnvVariable;
+    }
+
+    public IConfigurationProvider Build(IConfigurationBuilder builder) {
+        return new JsonFromEnvironmentVariableConfigurationProvider(this);
     }
 }

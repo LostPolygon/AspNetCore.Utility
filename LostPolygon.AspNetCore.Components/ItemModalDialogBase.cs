@@ -4,44 +4,44 @@ using BlazorStrap;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 
-namespace LostPolygon.AspNetCore.Components {
-    public abstract class ItemModalDialogBase<TItemViewModel> : ComponentBase where TItemViewModel : class {
-        [Parameter]
-        public EventCallback<TItemViewModel> OnCommitted { get; set; }
+namespace LostPolygon.AspNetCore.Components;
 
-        protected TItemViewModel? ViewModel { get; private set; } = null!;
+public abstract class ItemModalDialogBase<TItemViewModel> : ComponentBase where TItemViewModel : class {
+    [Parameter]
+    public EventCallback<TItemViewModel> OnCommitted { get; set; }
 
-        protected BSModal Modal { get; set; } = null!;
+    protected TItemViewModel? ViewModel { get; private set; } = null!;
 
-        protected EditContext? EditContext { get; private set; }
+    protected BSModal Modal { get; set; } = null!;
 
-        protected void Open() {
-            ViewModel = CreateItemViewModel();
-            EditContext = new EditContext(ViewModel);
-            Modal.Show();
-        }
+    protected EditContext? EditContext { get; private set; }
 
-        protected abstract TItemViewModel CreateItemViewModel();
+    protected void Open() {
+        ViewModel = CreateItemViewModel();
+        EditContext = new EditContext(ViewModel);
+        Modal.ShowAsync();
+    }
 
-        protected abstract Task<bool> Commit();
+    protected abstract TItemViewModel CreateItemViewModel();
 
-        protected virtual void OnCloseClicked() {
-            Modal.Hide();
-        }
+    protected abstract Task<bool> Commit();
 
-        protected virtual async Task OnCommitClicked() {
-            Debug.Assert(EditContext != null, "EditContext != null");
-            bool valid = EditContext.Validate();
-            if (!valid)
-                return;
+    protected virtual void OnCloseClicked() {
+        Modal.HideAsync();
+    }
 
-            bool success = await Commit();
-            Modal.Hide();
+    protected virtual async Task OnCommitClicked() {
+        Debug.Assert(EditContext != null, "EditContext != null");
+        bool valid = EditContext.Validate();
+        if (!valid)
+            return;
 
-            Debug.Assert(ViewModel != null, "ViewModel != null");
-            if (success) {
-                await OnCommitted.InvokeAsync(ViewModel);
-            }
+        bool success = await Commit();
+        await Modal.HideAsync();
+
+        Debug.Assert(ViewModel != null, "ViewModel != null");
+        if (success) {
+            await OnCommitted.InvokeAsync(ViewModel);
         }
     }
 }
