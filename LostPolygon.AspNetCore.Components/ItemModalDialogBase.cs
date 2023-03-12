@@ -17,18 +17,18 @@ public abstract class ItemModalDialogBase<TItemViewModel> : ComponentBase where 
 
     protected EditContext? EditContext { get; private set; }
 
-    protected void Open() {
+    protected async Task Open() {
         ViewModel = CreateItemViewModel();
         EditContext = new EditContext(ViewModel);
-        Modal.ShowAsync();
+        await Modal.ShowAsync();
     }
 
     protected abstract TItemViewModel CreateItemViewModel();
 
     protected abstract Task<bool> Commit();
 
-    protected virtual void OnCloseClicked() {
-        Modal.HideAsync();
+    protected virtual async Task OnCloseClicked() {
+        await Modal.HideAsync();
     }
 
     protected virtual async Task OnCommitClicked() {
