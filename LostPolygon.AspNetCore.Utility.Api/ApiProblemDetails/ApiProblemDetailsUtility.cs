@@ -8,32 +8,6 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 namespace LostPolygon.AspNetCore.Utility.Api;
 
 public static class ApiProblemDetailsUtility {
-    public static UnauthorizedObjectResult UnauthorizedApiProblemDetails(
-        IDescriptiveError? error = null,
-        ModelStateDictionary? modelState = null,
-        IReadOnlyDictionary<string, string[]>? additionalInfo = null) {
-        return ApiProblemDetails(
-            details => new UnauthorizedObjectResult(details),
-            HttpStatusCode.Unauthorized,
-            error,
-            modelState,
-            additionalInfo
-        );
-    }
-
-    public static UnprocessableEntityObjectResult UnprocessableEntityApiProblemDetails(
-        IDescriptiveError? error = null,
-        ModelStateDictionary? modelState = null,
-        IReadOnlyDictionary<string, string[]>? additionalInfo = null) {
-        return ApiProblemDetails(
-            details => new UnprocessableEntityObjectResult(details),
-            HttpStatusCode.UnprocessableEntity,
-            error,
-            modelState,
-            additionalInfo
-        );
-    }
-
     public static T ApiProblemDetails<T>(
         Func<ApiProblemDetails, T> objectResultFactory,
         HttpStatusCode statusCode,

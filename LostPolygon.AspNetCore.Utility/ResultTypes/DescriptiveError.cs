@@ -19,7 +19,7 @@ public readonly record struct DescriptiveError(string Key, string Message, objec
     public DescriptiveError(IDescriptiveError other) : this(other.Key, other.Message, other.AttemptedValue) {
     }
 
-    public override string? ToString() {
+    public override string ToString() {
         return ((IDescriptiveError) this).ToStringInternal();
     }
 }
@@ -28,7 +28,7 @@ public readonly record struct DescriptiveError<T>(string Key, string Message, ob
     public DescriptiveError(IDescriptiveError other) : this(other.Key, other.Message, other.AttemptedValue) {
     }
 
-    public override string? ToString() {
+    public override string ToString() {
         return ((IDescriptiveError) this).ToStringInternal();
     }
 }
