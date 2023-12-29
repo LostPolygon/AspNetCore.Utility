@@ -1,7 +1,7 @@
 using System;
 using FluentValidation.Validators;
 
-namespace LostPolygon.AspNetCore.Utility; 
+namespace LostPolygon.AspNetCore.Utility;
 
 public class UrlValidator : PropertyValidator {
     public UrlValidator()
@@ -13,6 +13,6 @@ public class UrlValidator : PropertyValidator {
         if (String.IsNullOrWhiteSpace(valueString))
             return false;
 
-        return Uri.TryCreate(valueString, UriKind.Absolute, out Uri _);
+        return Uri.TryCreate(valueString, UriKind.Absolute, out Uri? _);
     }
 }
