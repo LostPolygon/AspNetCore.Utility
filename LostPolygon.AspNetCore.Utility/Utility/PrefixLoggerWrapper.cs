@@ -1,7 +1,7 @@
 using System;
 using Microsoft.Extensions.Logging;
 
-namespace LostPolygon.AspNetCore.Utility; 
+namespace LostPolygon.AspNetCore.Utility;
 
 public class TaggedLoggerWrapper : ILogger {
     private readonly ILogger _loggerImplementation;
@@ -12,8 +12,8 @@ public class TaggedLoggerWrapper : ILogger {
         _prefix = prefix;
     }
 
-    public IDisposable BeginScope<TState>(TState state) {
-        return _loggerImplementation.BeginScope(state);
+    public IDisposable BeginScope<TState>(TState state) where TState : notnull {
+        return _loggerImplementation.BeginScope(state)!;
     }
 
     public bool IsEnabled(LogLevel logLevel) {

@@ -10,6 +10,6 @@ public class BigIntegerValueConverter : ValueConverter<BigInteger, string> {
     {
     }
 
-    private static readonly Expression<Func<string, BigInteger>> Deserialize = x => BigInteger.Parse(x);
+    private static readonly Expression<Func<string, BigInteger>> Deserialize = x => BigInteger.Parse(x, System.Globalization.CultureInfo.InvariantCulture);
     private static readonly Expression<Func<BigInteger, string>> Serialize = x => x.ToString("R", System.Globalization.CultureInfo.InvariantCulture);
 }

@@ -11,7 +11,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CompressedStaticFiles; 
+namespace CompressedStaticFiles;
 
 public class CompressedStaticFileMiddleware {
     private static Dictionary<string, string> compressionTypes =
@@ -65,10 +65,11 @@ public class CompressedStaticFileMiddleware {
                     // we need to restore the original content type, otherwise it would be based on the compression type
                     // (for example "application/brotli" instead of "text/html")
                     string? contentType = null;
-                    if (contentTypeProvider.TryGetContentType(ctx.File.PhysicalPath.Remove(
-                            ctx.File.PhysicalPath.Length - fileExtension.Length, fileExtension.Length), out contentType))
+                    string filePath = ctx.File.PhysicalPath!.Remove(ctx.File.PhysicalPath.Length - fileExtension.Length, fileExtension.Length);
+                    if (contentTypeProvider.TryGetContentType(filePath, out contentType))
                         ctx.Context.Response.ContentType = contentType;
-                    ctx.Context.Response.Headers.Add("Content-Encoding", new[] { compressionType });
+
+                    ctx.Context.Response.Headers["Content-Encoding"] = new[] { compressionType };
                 }
             }
         };
