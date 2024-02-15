@@ -4,11 +4,11 @@ using System.Linq.Expressions;
 using System.Reflection;
 using FluentValidation;
 
-namespace LostPolygon.AspNetCore.Utility; 
+namespace LostPolygon.AspNetCore.Utility;
 
 public static class ExtendedDisplayNameResolver {
     private static Func<Type, MemberInfo, LambdaExpression, string?> _defaultDisplayNameResolver;
-    private static ConcurrentDictionary<MemberInfo, string?> _displayNameCache = new ConcurrentDictionary<MemberInfo, string?>();
+    private static ConcurrentDictionary<MemberInfo, string?> _displayNameCache = new();
 
     static ExtendedDisplayNameResolver() {
         Func<Type,MemberInfo,LambdaExpression,string> currentResolver = ValidatorOptions.DisplayNameResolver;
@@ -21,7 +21,7 @@ public static class ExtendedDisplayNameResolver {
         ValidatorOptions.DisplayNameResolver = DisplayNameResolver;
     }
 
-    private static string? DisplayNameResolver(Type type, MemberInfo memberInfo, LambdaExpression expression) {
+    private static string? DisplayNameResolver(Type type, MemberInfo? memberInfo, LambdaExpression expression) {
         if (memberInfo == null)
             return null;
 
