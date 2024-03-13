@@ -7,28 +7,31 @@ using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace LostPolygon.EntityFrameworkCore; 
+namespace LostPolygon.EntityFrameworkCore;
 
 public static class DatabaseExtensions {
     public static void AddInMemorySqliteDbContext<T>(
         this IServiceCollection services,
+        Action<SqliteDbContextOptionsBuilder>? sqliteOptionsConfigureAction,
         Action<DbContextOptionsBuilder>? dbContextOptionsConfigureAction = null
     ) where T : DbContext {
-        AddSqliteDbContext<T>(services, "DataSource=:memory:", true, dbContextOptionsConfigureAction);
+        AddSqliteDbContext<T>(services, "DataSource=:memory:", true, sqliteOptionsConfigureAction, dbContextOptionsConfigureAction);
     }
 
     public static void AddSqliteDbContext<T>(
         this IServiceCollection services,
         string connectionString,
+        Action<SqliteDbContextOptionsBuilder>? sqliteOptionsConfigureAction,
         Action<DbContextOptionsBuilder>? dbContextOptionsConfigureAction = null
     ) where T : DbContext {
-        AddSqliteDbContext<T>(services, connectionString, false, dbContextOptionsConfigureAction);
+        AddSqliteDbContext<T>(services, connectionString, false, sqliteOptionsConfigureAction, dbContextOptionsConfigureAction);
     }
 
     private static void AddSqliteDbContext<T>(
         this IServiceCollection services,
         string connectionString,
         bool singleConnection,
+        Action<SqliteDbContextOptionsBuilder>? sqliteOptionsConfigureAction,
         Action<DbContextOptionsBuilder>? dbContextOptionsConfigureAction = null
     ) where T : DbContext {
         SqliteConnection connection = null!;
@@ -39,10 +42,10 @@ public static class DatabaseExtensions {
 
         services.AddDbContext<T>(options => {
             if (singleConnection) {
-                options.UseSqlite(connection!);
+                options.UseSqlite(connection, sqliteOptionsConfigureAction);
             }
             else {
-                options.UseSqlite(connectionString);
+                options.UseSqlite(connectionString, sqliteOptionsConfigureAction);
             }
 
             dbContextOptionsConfigureAction?.Invoke(options);
