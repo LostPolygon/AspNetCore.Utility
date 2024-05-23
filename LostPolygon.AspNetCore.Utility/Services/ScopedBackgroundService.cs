@@ -7,14 +7,14 @@ using Microsoft.Extensions.Hosting;
 namespace LostPolygon.AspNetCore.Utility;
 
 public abstract class ScopedBackgroundService : BackgroundService {
-    private readonly IServiceScopeFactory _serviceScopeFactory;
+    protected IServiceScopeFactory ServiceScopeFactory { get; }
 
     protected ScopedBackgroundService(IServiceScopeFactory serviceScopeFactory) {
-        _serviceScopeFactory = serviceScopeFactory;
+        ServiceScopeFactory = serviceScopeFactory;
     }
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken) {
-        using IServiceScope scope = _serviceScopeFactory.CreateScope();
+        using IServiceScope scope = ServiceScopeFactory.CreateScope();
         IServiceProvider serviceProvider = scope.ServiceProvider;
         GetServices(serviceProvider);
         await DoWork(stoppingToken);
