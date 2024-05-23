@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace LostPolygon.AspNetCore.Utility; 
+namespace LostPolygon.AspNetCore.Utility;
 
+[Obsolete(".NET 8 has this already")]
 public class DictionaryStringPrimitiveJsonConverter : JsonConverter<IDictionary<string, object?>> {
     public override bool CanConvert(Type typeToConvert) {
         return typeof(IDictionary<string, object?>).IsAssignableFrom(typeToConvert);
