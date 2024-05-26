@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace LostPolygon.AspNetCore.Utility; 
+namespace LostPolygon.AspNetCore.Utility;
 
 public class ServicesPreBuilderService : IHostedService {
     private readonly IServiceCollection _services;
@@ -21,9 +21,6 @@ public class ServicesPreBuilderService : IHostedService {
     public Task StartAsync(CancellationToken cancellationToken) {
         IEnumerable<Type> types = GetSingletons();
         foreach (Type type in types) {
-            if (type == typeof(DbContextOptions))
-                continue;
-
             _serviceProvider.GetService(type);
         }
 
@@ -35,8 +32,10 @@ public class ServicesPreBuilderService : IHostedService {
     private IEnumerable<Type> GetSingletons() {
         return _services
             .Where(descriptor => descriptor.Lifetime == ServiceLifetime.Singleton)
-            .Where(descriptor => descriptor.ImplementationType != GetType())
+            .Where(descriptor => !descriptor.IsKeyedService)
+            .Where(descriptor => descriptor.ServiceType != typeof(DbContextOptions))
             .Where(descriptor => descriptor.ServiceType.ContainsGenericParameters == false)
+            .Where(descriptor => descriptor.ImplementationType != GetType())
             .Select(descriptor => descriptor.ServiceType)
             .Distinct();
     }
