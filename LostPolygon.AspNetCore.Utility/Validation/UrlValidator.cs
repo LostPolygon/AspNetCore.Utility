@@ -12,7 +12,7 @@ namespace LostPolygon.AspNetCore.Utility {
             if (String.IsNullOrWhiteSpace(valueString))
                 return false;
 
-            return Uri.TryCreate(valueString, UriKind.Absolute, out Uri _);
+            return Uri.TryCreate(valueString, UriKind.Absolute, out _);
         }
     }
 }
