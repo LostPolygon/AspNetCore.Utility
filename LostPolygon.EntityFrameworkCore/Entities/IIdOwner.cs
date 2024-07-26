@@ -1,5 +1,5 @@
 ﻿namespace LostPolygon.EntityFrameworkCore.Entities;
 
-public interface IIdOwner<out TId> where TId : struct {
+public interface IIdOwner<out TId> {
     TId Id { get; }
 }

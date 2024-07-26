@@ -4,7 +4,7 @@ using LostPolygon.EntityFrameworkCore.Entities;
 
 namespace LostPolygon.EntityFrameworkCore;
 
-public abstract class UserOwnedEntity<TUserId, TId> : IIdOwner<TId> where TId : struct {
+public abstract class UserOwnedEntity<TUserId, TId> : IIdOwner<TId> {
     [Key]
     [Column(Order = 1)]
     public TId Id { get; protected set; } = default!;
