@@ -16,7 +16,9 @@ public class FormlessEditForm : EditForm {
         // If _fixedEditContext changes, tear down and recreate all descendants.
         // This is so we can safely use the IsFixed optimization on CascadingValue,
         // optimizing for the common case where _fixedEditContext never changes.
-        builder.OpenRegion(EditContext!.GetHashCode());
+        #pragma warning disable ASP0006
+        builder.OpenRegion(EditContext.GetHashCode());
+        #pragma warning restore ASP0006
 
         builder.OpenElement(0, "span");
         builder.AddMultipleAttributes(1, AdditionalAttributes);

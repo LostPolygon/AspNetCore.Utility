@@ -39,7 +39,7 @@ public abstract partial class EntityGrid<T> where T : notnull {
 
     private GridComponent<T> ItemsGridComponent = null!;
     private List<T> FilteredItems { get; set; } = null!;
-    private List<EntityGridFilterBase<T>> Filters { get; set; } = new List<EntityGridFilterBase<T>>();
+    private List<EntityGridFilterBase<T>> Filters { get; set; } = [];
 
     protected abstract void CnCreatingColumnsConfiguration(
         IGridColumnCollection<T> columns,

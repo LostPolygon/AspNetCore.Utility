@@ -30,14 +30,14 @@ public class DataSeedingService : IHostedService {
                 throw new OptionsValidationException(
                     nameof(DataSeedingConfiguration.DataSeeders),
                     typeof(DataSeedingConfiguration),
-                    new[] { $"Data seeder '{dataSeederTypeName}' not found" }
+                    [$"Data seeder '{dataSeederTypeName}' not found"]
                 );
 
             if (!typeof(IDataSeeder).IsAssignableFrom(dataSeederType))
                 throw new OptionsValidationException(
                     nameof(DataSeedingConfiguration.DataSeeders),
                     typeof(DataSeedingConfiguration),
-                    new[] { $"Data seeder '{dataSeederTypeName}' must implement {nameof(IDataSeeder)}" }
+                    [$"Data seeder '{dataSeederTypeName}' must implement {nameof(IDataSeeder)}"]
                 );
 
             IDataSeeder dataSeeder = (IDataSeeder) ActivatorUtilities.CreateInstance(serviceScope.ServiceProvider, dataSeederType);

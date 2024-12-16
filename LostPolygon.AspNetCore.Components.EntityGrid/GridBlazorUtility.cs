@@ -20,7 +20,7 @@ public static class GridBlazorUtility {
 
         var rawResult = new List<List<(IGridColumn<T> column, object displayValue)>>(items.Count);
         foreach (T unused in items) {
-            rawResult.Add(new List<(IGridColumn<T> column, object displayValue)>());
+            rawResult.Add([]);
         }
 
         foreach (var gridColumn1 in columns) {
