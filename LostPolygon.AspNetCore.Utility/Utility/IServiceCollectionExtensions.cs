@@ -2,7 +2,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 
-namespace LostPolygon.AspNetCore.Utility; 
+namespace LostPolygon.AspNetCore.Utility;
 
 public static class ServiceCollectionExtensions {
     public static IServiceCollection AddOptionsAndValidate<TOptions, TValidator>(this IServiceCollection services, IConfiguration configuration)
