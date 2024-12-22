@@ -1,21 +1,17 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
     <PropertyGroup>
-        <TargetFramework>net6.0</TargetFramework>
+        <TargetFramework>net8.0</TargetFramework>
         <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
     </PropertyGroup>
-
-    <ItemGroup>
-        <FrameworkReference Include="Microsoft.AspNetCore.App" />
-    </ItemGroup>
 
     <ItemGroup>
       <ProjectReference Include="..\LostPolygon.AspNetCore.Utility.Web\LostPolygon.AspNetCore.Utility.Web.csproj" />
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="BlazorStrap" Version="5.1.100" />
-      <PackageReference Include="BlazorStrap.V4" Version="5.1.100" />
+      <PackageReference Include="BlazorStrap" Version="5.2.103" />
+      <PackageReference Include="BlazorStrap.V4" Version="5.2.103" />
     </ItemGroup>
 
 </Project>

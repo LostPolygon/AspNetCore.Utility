@@ -1,9 +1,10 @@
 using System;
+using System.Diagnostics;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Components.Rendering;
 
-namespace LostPolygon.AspNetCore.Components; 
+namespace LostPolygon.AspNetCore.Components;
 
 public class FormlessEditForm : EditForm {
     protected override void OnParametersSet() {
@@ -13,10 +14,14 @@ public class FormlessEditForm : EditForm {
     }
 
     protected override void BuildRenderTree(RenderTreeBuilder builder) {
+        Debug.Assert(EditContext != null);
+
         // If _fixedEditContext changes, tear down and recreate all descendants.
         // This is so we can safely use the IsFixed optimization on CascadingValue,
         // optimizing for the common case where _fixedEditContext never changes.
-        builder.OpenRegion(EditContext!.GetHashCode());
+        #pragma warning disable ASP0006
+        builder.OpenRegion(EditContext.GetHashCode());
+        #pragma warning restore ASP0006
 
         builder.OpenElement(0, "span");
         builder.AddMultipleAttributes(1, AdditionalAttributes);

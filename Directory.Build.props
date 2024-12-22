@@ -3,6 +3,6 @@
         <Nullable>enable</Nullable>
         <LangVersion>13.0</LangVersion>
         <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-        <WarningsNotAsErrors>0162</WarningsNotAsErrors>
+        <WarningsNotAsErrors>0162;NU1902;NU1903</WarningsNotAsErrors>
     </PropertyGroup>
 </Project>

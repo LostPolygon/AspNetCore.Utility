@@ -115,7 +115,7 @@ public class CompressedStaticFileMiddleware {
     /// Find the encodings that are supported by the browser and by this middleware
     /// </summary>
     private static IEnumerable<string> GetSupportedEncodings(HttpContext context) {
-        string[]? browserSupportedCompressionTypes = context.Request.Headers["Accept-Encoding"].ToString().Split(new[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries);
+        string[]? browserSupportedCompressionTypes = context.Request.Headers["Accept-Encoding"].ToString().Split([',', ' '], StringSplitOptions.RemoveEmptyEntries);
         IEnumerable<string>? validCompressionTypes = compressionTypes.Keys.Intersect(browserSupportedCompressionTypes, StringComparer.OrdinalIgnoreCase);
         return validCompressionTypes;
     }
