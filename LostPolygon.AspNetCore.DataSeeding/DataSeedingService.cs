@@ -3,25 +3,22 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
 namespace LostPolygon.AspNetCore.DataSeeding;
 
-public class DataSeedingService : IHostedService {
-    private readonly IServiceProvider _serviceProvider;
-    private readonly IOptions<DataSeedingConfiguration> _dataSeedingConfiguration;
-
-    public DataSeedingService(IServiceProvider serviceProvider, IOptions<DataSeedingConfiguration> dataSeedingConfiguration) {
-        _serviceProvider = serviceProvider;
-        _dataSeedingConfiguration = dataSeedingConfiguration;
-    }
-
+public class DataSeedingService(
+    IServiceProvider serviceProvider,
+    ILogger<DataSeedingService> logger,
+    IOptions<DataSeedingConfiguration> dataSeedingConfiguration
+) : IHostedService {
     public async Task StartAsync(CancellationToken cancellationToken) {
-        if (_dataSeedingConfiguration.Value.DataSeeders == null)
+        if (dataSeedingConfiguration.Value.DataSeeders == null)
             return;
 
-        using IServiceScope serviceScope = _serviceProvider.CreateScope();
-        foreach (string dataSeederTypeName in _dataSeedingConfiguration.Value.DataSeeders) {
+        using IServiceScope serviceScope = serviceProvider.CreateScope();
+        foreach (string dataSeederTypeName in dataSeedingConfiguration.Value.DataSeeders) {
             if (String.IsNullOrWhiteSpace(dataSeederTypeName))
                 continue;
 
@@ -30,18 +27,20 @@ public class DataSeedingService : IHostedService {
                 throw new OptionsValidationException(
                     nameof(DataSeedingConfiguration.DataSeeders),
                     typeof(DataSeedingConfiguration),
-                    new[] { $"Data seeder '{dataSeederTypeName}' not found" }
+                    [$"Data seeder '{dataSeederTypeName}' not found"]
                 );
 
             if (!typeof(IDataSeeder).IsAssignableFrom(dataSeederType))
                 throw new OptionsValidationException(
                     nameof(DataSeedingConfiguration.DataSeeders),
                     typeof(DataSeedingConfiguration),
-                    new[] { $"Data seeder '{dataSeederTypeName}' must implement {nameof(IDataSeeder)}" }
+                    [$"Data seeder '{dataSeederTypeName}' must implement {nameof(IDataSeeder)}"]
                 );
 
+            logger.LogInformation("Running data seeder '{DataSeederTypeName}'.", dataSeederTypeName);
             IDataSeeder dataSeeder = (IDataSeeder) ActivatorUtilities.CreateInstance(serviceScope.ServiceProvider, dataSeederType);
             await dataSeeder.Seed(cancellationToken);
+            logger.LogInformation("Completed data seeder '{DataSeederTypeName}'.", dataSeederTypeName);
         }
     }
 

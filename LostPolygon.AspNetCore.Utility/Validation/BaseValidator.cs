@@ -28,7 +28,7 @@ public abstract class BaseValidator<T> : AbstractValidator<T> {
         List<PropertyRule> rules = this.Cast<PropertyRule>().ToList();
         PropertyInfo[] properties = typeof(T).GetProperties();
 
-        List<ValidationFailure> missingRulesFailures = new();
+        List<ValidationFailure> missingRulesFailures = [];
         foreach (PropertyInfo property in properties) {
             bool ruleExists = rules.Any(rule => CheckMemberInfosEqual(rule.Member, property));
             if (!ruleExists) {

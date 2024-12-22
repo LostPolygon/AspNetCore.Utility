@@ -13,7 +13,7 @@ public class ValidGuidAttribute : ValidationAttribute {
         if (valueString == null || !Guid.TryParseExact(valueString, "D", out _))
             return new ValidationResult(
                 String.Format(ErrorMessageString, validationContext.DisplayName),
-                new[] { validationContext.MemberName! }
+                [validationContext.MemberName!]
             );
 
         return ValidationResult.Success;

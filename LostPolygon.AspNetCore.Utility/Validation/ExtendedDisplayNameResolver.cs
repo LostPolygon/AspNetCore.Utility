@@ -7,13 +7,13 @@ using FluentValidation;
 namespace LostPolygon.AspNetCore.Utility;
 
 public static class ExtendedDisplayNameResolver {
-    private static Func<Type, MemberInfo, LambdaExpression, string?> _defaultDisplayNameResolver;
-    private static ConcurrentDictionary<MemberInfo, string?> _displayNameCache = new();
+    private static readonly Func<Type, MemberInfo, LambdaExpression, string?> DefaultDisplayNameResolver;
+    private static readonly ConcurrentDictionary<MemberInfo, string?> DisplayNameCache = new();
 
     static ExtendedDisplayNameResolver() {
         Func<Type,MemberInfo,LambdaExpression,string> currentResolver = ValidatorOptions.DisplayNameResolver;
         ValidatorOptions.DisplayNameResolver = null;
-        _defaultDisplayNameResolver = ValidatorOptions.DisplayNameResolver!;
+        DefaultDisplayNameResolver = ValidatorOptions.DisplayNameResolver!;
         ValidatorOptions.DisplayNameResolver = currentResolver;
     }
 
@@ -25,9 +25,9 @@ public static class ExtendedDisplayNameResolver {
         if (memberInfo == null)
             return null;
 
-        return _displayNameCache.GetOrAdd(memberInfo, memberInfo => {
+        return DisplayNameCache.GetOrAdd(memberInfo, memberInfo => {
             if (!AttributeUtility.GetMemberNameFromNameAttributes(memberInfo, out string? name)) {
-                name = _defaultDisplayNameResolver(type, memberInfo, expression);
+                name = DefaultDisplayNameResolver(type, memberInfo, expression);
             }
 
             return name;

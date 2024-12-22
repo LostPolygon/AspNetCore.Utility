@@ -43,8 +43,7 @@ public static class DatabaseExtensions {
         services.AddDbContext<T>(options => {
             if (singleConnection) {
                 options.UseSqlite(connection, sqliteOptionsConfigureAction);
-            }
-            else {
+            } else {
                 options.UseSqlite(connectionString, sqliteOptionsConfigureAction);
             }
 
