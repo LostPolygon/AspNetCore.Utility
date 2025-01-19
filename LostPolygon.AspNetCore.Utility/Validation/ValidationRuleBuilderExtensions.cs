@@ -6,11 +6,11 @@ using FluentValidation.Internal;
 namespace LostPolygon.AspNetCore.Utility;
 
 public static class ValidationRuleBuilderExtensions {
-    public static IRuleBuilderOptions<T, string> IsGuid<T>(this IRuleBuilderInitial<T, string> rule, string guidFormat = "D") {
+    public static IRuleBuilderOptions<T, string> IsGuid<T>(this IRuleBuilder<T, string> rule, string guidFormat = "D") {
         return rule.SetValidator(new GuidValidator(guidFormat));
     }
 
-    public static IRuleBuilderOptions<T, string> IsUrl<T>(this IRuleBuilderInitial<T, string> rule) {
+    public static IRuleBuilderOptions<T, string> IsUrl<T>(this IRuleBuilder<T, string> rule) {
         return rule.SetValidator(new UrlValidator());
     }
 
