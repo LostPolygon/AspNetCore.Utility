@@ -14,9 +14,8 @@ public static class ValidationRuleBuilderExtensions {
         return rule.SetValidator(new UrlValidator());
     }
 
-    public static IRuleBuilderOptions<T, string> NotNullOrWhitespace<T>(
-        this IRuleBuilder<T, string> ruleBuilder) {
-        return ruleBuilder
+    public static IRuleBuilderOptions<T, string?> NotNullOrWhitespace<T>(this IRuleBuilder<T, string?> rule) {
+        return rule
             .Must(s => !String.IsNullOrWhiteSpace(s))
             .WithMessage("'{PropertyName}' must not be empty or contain only whitespace.");
     }
